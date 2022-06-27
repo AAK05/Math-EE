@@ -36,4 +36,5 @@ def encrypt(message):
     encrypted = "".join(encrypted_lst_char)
     return encrypted
 
-print(encrypt("Secret Message"))
+if __name__ == "__main__":
+    print(encrypt("Secret Message"))
