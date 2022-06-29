@@ -12,7 +12,7 @@ def autocorrelation(data,k=1):
     acf = autocovariance(data,k)/autocovariance(data,0)
     return acf
 
-def correlogram(data,maxk=1000):
+def correlogram(data,maxk=100):
     correlogram = {}
     for k in range(maxk+1):
         correlogram[k] = autocorrelation(data,k)

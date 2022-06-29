@@ -2,7 +2,7 @@ from div_digits import divide
 from math import gcd
 import numpy as np
 
-def DivAllCoPrimeRNG(limit,dp=100000):
+def DivAllCoPrimeRNG(limit,dp=10000):
     data = []
     v2 = -1
     for i in range(limit):
@@ -17,6 +17,6 @@ def DivAllCoPrimeRNG(limit,dp=100000):
     print(len(data))
     return data
 
-from autocorrelation import correlogram
-print(correlogram(DivAllCoPrimeRNG(2011,100000),20))
+#from autocorrelation import correlogram
+#print(correlogram(DivAllCoPrimeRNG(7919,10000),20))
     

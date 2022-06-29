@@ -1,6 +1,6 @@
 from mpmath import mp
 
-def divide(num1,num2,dp=100000):
+def divide(num1,num2,dp=10000):
     f = num2//(10*num1) + 3
     mp.dps = dp+f
     ans = mp.fdiv(num1,num2)
