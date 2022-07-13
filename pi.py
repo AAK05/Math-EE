@@ -10,4 +10,12 @@ def pi(length):
         lst.append(int(digit))
     return lst[0:-1] #This is done to shorten by 1
 
+def writepi(length=1000000):
+    import json
+    p = pi(length)
+    with open("pi-digits.json","w",) as f:
+        json.dump(p,f)
+
+if __name__ == "__main__":
+    writepi()
 #print(pi(20))
