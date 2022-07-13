@@ -13,10 +13,23 @@ def autocorrelation(data,k=1):
     return acf
 
 def correlogram(data,maxk=100):
-    correlogram = {}
-    for k in range(maxk+1):
-        correlogram[k] = autocorrelation(data,k)
-    return correlogram
+    graph = {}
+    for k in range(1,maxk+1):
+        graph[k] = autocorrelation(data,k)
+    return graph
+
+def max_autocorr(data,maxk=100):
+    graph = correlogram(data,maxk)
+    kmax = max(graph,key=graph.get)
+    p = graph[kmax]
+    return (kmax,p)
+
+#To find most negative autocorrelation
+def min_autocorr(data,maxk=100):
+    graph = correlogram(data,maxk)
+    kmin = min(graph,key=graph.get)
+    p = graph[kmin]
+    return (kmin,p)
 
 
 #data = [23.4,24.1,44.4,25.5,29.2,37.1,45.0,61.8,56.7,62.3,30.9,69.6,11.0,56.6,83.4,33.9,75.5,87.3,55.4,95.2]

@@ -1,13 +1,13 @@
-from pi import pi
+from pi import jsonpi
 from autocorrelation import correlogram
 from montecarlopitest import MonteCarloPi
 from RNG_div_all_Coprime import DivAllCoPrimeRNG
 from entropy import entropy
 from dig_transition import transition
 
-data = pi(1000000)
+data = jsonpi(1000000)
 #datax = [] #datax is to get several digits and splice to an integer: 3,1,4,1,5,9,2,6,5 becomes 31, 41, 59, 26, etc
-data2 = pi(400000)[200000:]
+data2 = jsonpi(400000)[200000:]
 """datax2 = []
 for i in range(len(data)):
     if i%2 == 0:

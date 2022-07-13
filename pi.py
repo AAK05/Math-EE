@@ -16,6 +16,12 @@ def writepi(length=1000000):
     with open("pi-digits.json","w",) as f:
         json.dump(p,f)
 
+def jsonpi(len=1000000):
+    import json
+    with open("pi-digits.json","r") as f:
+        p = json.load(f)
+    return p
+
 if __name__ == "__main__":
     writepi()
 #print(pi(20))

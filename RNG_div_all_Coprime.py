@@ -17,6 +17,20 @@ def DivAllCoPrimeRNG(limit,dp=10000):
     print(len(data))
     return data
 
+def writecoprime(limit=2023,dp=500000):
+    import json
+    p = DivAllCoPrimeRNG(limit,dp)
+    with open("coprime-digits.json","w") as f:
+        json.dump(p,f)
+
+def jsoncoprime():
+    import json
+    with open("coprime-digits.json","r") as f:
+        p = json.load(f)
+    return p
+
+if __name__ == "__main__":
+    writecoprime()
 #from autocorrelation import correlogram
 #print(correlogram(DivAllCoPrimeRNG(7919,10000),20))
     
