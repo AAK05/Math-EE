@@ -31,7 +31,7 @@ def jsoncoprime():
     return p
 
 if __name__ == "__main__":
-    writecoprime(157,1000)
+    writecoprime(2023,1000000)
 #from autocorrelation import correlogram
 #print(correlogram(DivAllCoPrimeRNG(7919,10000),20))
     

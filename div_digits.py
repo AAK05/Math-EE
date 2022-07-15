@@ -16,3 +16,5 @@ def divide(num1,num2,dp=10000):
         ans_lst.append(0)
     return ans_lst[:dp]
 
+if __name__ == "__main__":
+    print(divide(80,7,20))

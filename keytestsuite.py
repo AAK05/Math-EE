@@ -18,15 +18,53 @@ data2 = data1[::-1]
 #E.g: [1,2,3,4,5,6] becomes [12,34,56]
 datax1 = []
 datax2 = []
-for i in range(len(data1)):
-    if i%5 == 0:
-        n = str(data[i]) + str(data[i+1]) + str(data[i+2]) + str(data[i+3]) + str(data[i+4])
-        datax1.append(int(n))
-for i in range(len(data2)):
-    if i%5 == 0:
-        n = str(data2[i]) + str(data2[i+1]) + str(data2[i+2]) + str(data2[i+3]) + str(data2[i+4])
-        datax2.append(int(n))
 
+if max(data1) < 10:
+#Combine multiple base 10
+    for i in range(5*(len(data1)//5)):
+        if i%5 == 0:
+            n = str(data[i]) + str(data[i+1]) + str(data[i+2]) + str(data[i+3]) + str(data[i+4])
+            datax1.append(int(n))
+    for i in range(5*(len(data2)//5)):
+        if i%5 == 0:
+            n = str(data2[i]) + str(data2[i+1]) + str(data2[i+2]) + str(data2[i+3]) + str(data2[i+4])
+            datax2.append(int(n))
+else:
+#Combine 2 base26 then convert base10
+    for i in range(3*(len(data1)//3)):
+        if i%3 == 0:
+            n = 26*26*data[i] + 26*data[i+1] + data[i+2] #+ data[i+3] + data[i+4]
+            datax1.append(int(n))
+    for i in range(3*(len(data2)//3)):
+        if i%3 == 0:
+            n = 26*26*(data2[i]) + 26*(data2[i+1]) + (data2[i+2]) #+ (data2[i+3]) + (data2[i+4])
+            datax2.append(int(n))
+print(len(datax1),len(datax2))
+
+#Add 2
+"""for i in range((2 * len(data1)//2)-2):
+    if i%2 == 0:
+        n = 0
+        for m in range(i,i+2):
+            n += data1[m]
+        datax1.append(int(n))
+for i in range((2 * len(data2)//2)-2):
+    if i%2 == 0:
+        n = 0
+        for m in range(i,i+2):
+            n += data2[m]
+        datax2.append(int(n))"""
+
+#Add 3
+"""for i in range(3*(len(data1)//3)):
+    if i%3 == 0:
+        n = data[i] + data[i+1] + data[i+2] #+ data[i+3] + data[i+4]
+        datax1.append(int(n))
+for i in range(3*(len(data2)//3)):
+    if i%3 == 0:
+        n = (data2[i]) + (data2[i+1]) + (data2[i+2]) #+ (data2[i+3]) + (data2[i+4])
+        datax2.append(int(n))"""
+        
 print("Maximum autocorrelation (k,autocorrelation): " + str(max_autocorr(data1,20)))
 print("Minimum autocorrelation (k,autocorrelation): " + str(min_autocorr(data1,20)))
 print("Maximum pattern error from expected (pattern,%): " + str(max_pattern(data1)))
@@ -34,3 +72,4 @@ print("Minimum pattern error from expected (pattern,%): " + str(min_pattern(data
 print("Maximum frequency error (digit,%): " + str(max_freq_err(data1)))
 print("Minimum frequency error (digit,%): " + str(min_freq_err(data1)))
 print("Simulated value of pi: " + str(MonteCarloPi(datax1,datax2)))
+print("Simulated value of pi: " + str(MonteCarloPi(data1,data2)))
