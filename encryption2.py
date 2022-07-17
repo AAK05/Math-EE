@@ -2,6 +2,7 @@
 from list_add import list_add
 import json
 import string
+import re
 def loadkeysbase10(*keyjsons,length):
     data = []
     output = []
@@ -36,6 +37,22 @@ def loadkey(filename):
     with open(filename,"r") as f:
         key = json.load(f)
     return key
+
+def loadtxt(fname):
+    out = ""
+    with open(fname,"r") as f:
+        for line in f:
+            n = line.replace(" ","")
+            n = n.translate(str.maketrans("","",string.punctuation))
+            n = n.strip()
+            n = n.lower()
+            n = re.sub("[^a-z]","",n)
+            out = out + n
+    return out
+
+def writetxt(string,fname):
+    with open(fname,"w") as f:
+        f.write(string)
 
 def FormatTextToNum(message):
     message = message.replace(" ","") #Cleaning input
@@ -84,6 +101,8 @@ print(x)
 y = decrypt(x,"pi-with-coprime2023-b26.json")
 print(y)
 
+writetxt(encrypt(loadtxt("Amber-Spyglass-Clean.txt"),"pi-with-coprime2023-b26.json"),"Amber-Spyglass-Encrypted.txt")
+writejson(FormatTextToNum(loadtxt("Amber-Spyglass-Encrypted.txt")),"Amber-Spyglass_Encrypted-Enumerated.json")
 #b26 = convertbase26(loadkeysbase10("coprime-digits-mod10-2023-1000k.json","pi-digits.json",length=1000000))
 #b26 = convertbase26(loadkeysbase10("pi-digits.json",length=1000000))
 #writejson(b26,"test26v2.json")

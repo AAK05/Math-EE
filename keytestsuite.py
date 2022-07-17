@@ -9,7 +9,10 @@ import json
 fname = sys.argv[1]
 #print(fname)
 with open(fname,"r") as f:
-    data = json.load(f)
+    try:
+        data = json.load(f)
+    except:
+        data = [x for x in str(f.readline())]
     print(len(data))
 
 data1 = data#[0:500000]
