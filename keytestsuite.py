@@ -71,8 +71,8 @@ for i in range(3*(len(data2)//3)):
 
 print("Maximum autocorrelation (k,autocorrelation): " + str(max_autocorr(data1,20)))
 print("Minimum autocorrelation (k,autocorrelation): " + str(min_autocorr(data1,20)))
-print("Maximum pattern error from expected (pattern,%): " + str(max_pattern(data1)))
-print("Minimum pattern error from expected (pattern,%): " + str(min_pattern(data1)))
+#print("Maximum pattern error from expected (pattern,%): " + str(max_pattern(data1)))
+#print("Minimum pattern error from expected (pattern,%): " + str(min_pattern(data1)))
 print("Max diff error (diff,%): " + str(max_diff_error(data1)))
 print("Min diff error (diff,%): " + str(min_diff_error(data1)))
 print("Max slope error(slope,%): " + str(max_slope_error(data1)))
