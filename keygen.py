@@ -27,7 +27,7 @@ def convertbase26(data):
     output = output[::-1]
     return output
 
-def writejson(obj,fname="testkeygen3.json"):
+def writejson(obj,fname="testkeyfinal.json"):
     with open(fname,"w") as f:
         json.dump(obj,f)
 
@@ -35,8 +35,10 @@ if __name__=="__main__":
     sequences = (
         "coprime-digits-mod10-2023-1000k.json",
         "pi-digits.json",
-        #"sqrt-2-1000000dp.json"
+        #"sqrt-2-1000000dp.json",
+        "sqrt-2-factor3.json"
     )
     data = loadkeysbase10(sequences,length=1000000)
+    #writejson(data,"testkeygenfinal-b10.json")
     data26 = convertbase26(data)
     writejson(data26)

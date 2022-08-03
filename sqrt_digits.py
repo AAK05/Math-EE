@@ -15,6 +15,17 @@ def square_rt(number,dp=10000):
         ans_lst.append(0)
     return ans_lst[:dp]
 
+def scalar_mult(data,factor):
+    output = []
+    for i in data:
+        output.append((i*factor)%10)
+    return output
+
+def write_json(data,fname):
+    import json
+    with open(fname,"w") as f:
+        json.dump(data,f)
+
 def write_sqrt(number,dp=10000):
     import json
     data = square_rt(number,dp)
@@ -24,4 +35,5 @@ def write_sqrt(number,dp=10000):
 
 if __name__ == "__main__":
     #print(square_rt(2,1000))
-    write_sqrt(2,1000000)
+    #write_sqrt(2,1000000)
+    write_json(scalar_mult(square_rt(2,1000000),3),"sqrt-2-factor3.json")
