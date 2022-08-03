@@ -6,8 +6,8 @@ def DivAllCoPrimeRNG(limit,dp=10000):
     data = []
     v2 = -1
     for i in range(limit):
-        if gcd(i+1,limit)==1:
-            a = divide(limit,i+1,dp)
+        if gcd(i+1,limit)==1: #Checks if coprime, greatest common divisor(GCD)==1
+            a = divide(limit,i+1,dp) #divide function returns array of digits
             v1 = np.array(a)
             if isinstance(v2,int):
                 v2 = v1
