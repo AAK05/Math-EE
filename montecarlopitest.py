@@ -5,7 +5,7 @@ def distancetocentre(x,y,centerx=0.5,centery=0.5):
     dist = ((x-centerx)**2 + (y-centery)**2)**0.5
     return dist
 
-def MonteCarloPi(datax,datay=None):
+def normalizedcarlo(datax,datay=None):
     x = np.array(datax).reshape(-1,1)
     scaler = preprocessing.MinMaxScaler()
     normalizedx = scaler.fit_transform(x)
@@ -21,17 +21,22 @@ def MonteCarloPi(datax,datay=None):
     normalizedx = normalizedx[0]
     normalizedy = normalizedy.tolist()
     normalizedy = normalizedy[0]
+    return normalizedx,normalizedy
+
+def MonteCarloPi(datax,datay=None):
+    x,y = normalizedcarlo(datax,datay)
     n=0
     inside = 0
     outside = 0
-    for i in normalizedx:
-        dist = distancetocentre(i,normalizedy[n])
+    for i in x:
+        dist = distancetocentre(i,y[n])
         n+=1
         if dist <= 0.5:
             inside += 1
         else:
             outside += 1
     pi = 4*(inside/(inside+outside))
+    print(inside,outside+inside)
     return pi
 
 """from RNG_div_all_Coprime import DivAllCoPrimeRNG
