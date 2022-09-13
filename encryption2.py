@@ -101,7 +101,7 @@ print(x)
 y = decrypt(x,"pi-with-coprime2023-b26.json")
 print(y)
 
-writetxt(encrypt(loadtxt("Amber-Spyglass-Clean.txt"),"testkeygen3.json"),"Amber-Spyglass-Encrypted.txt")
+writetxt(encrypt(loadtxt("Amber-Spyglass-Clean.txt"),"testkeyfinal.json"),"Amber-Spyglass-Encrypted.txt")
 writejson(FormatTextToNum(loadtxt("Amber-Spyglass-Encrypted.txt")),"Amber-Spyglass_Encrypted-Enumerated.json")
 #b26 = convertbase26(loadkeysbase10("coprime-digits-mod10-2023-1000k.json","pi-digits.json",length=1000000))
 #b26 = convertbase26(loadkeysbase10("pi-digits.json",length=1000000))

@@ -59,7 +59,7 @@ def plotcarlo(data):
             datax2.append(int(n))
     x,y = normalizedcarlo(datax1,datax2)
     figure,axes = plt.subplots()
-    plt.scatter(x,y,s=0.15,color="r",linewidths=0)
+    plt.scatter(x,y,s=0.15,color="b",linewidths=0)
     plt.xlim(0,1)
     plt.ylim(0,1)
     c = plt.Circle((0.5,0.5),0.5,fill=False,edgecolor="black",linewidth=0.5,visible=True)
@@ -67,9 +67,43 @@ def plotcarlo(data):
     plt.show()
     print(MonteCarloPi(x,y))
 
+def plotnextdig(data):
+    expected = len(data)/26
+    dist = difftest(data)
+    x = np.linspace(0,25,26)
+    y = np.array([(100*(dist[i]-expected)/expected) for i in range(26)])
+    plt.grid()
+    plt.plot(x,y,color="r",marker=".")
+    plt.xlabel("Difference")
+    plt.ylabel("% Error")
+    plt.show()
+
+def plotnextdighist(data):
+    dist = difftest(data)
+    plt.bar(dist.keys(), dist.values(), 1, color='r',edgecolor="black",linewidth=1.2)
+    plt.show()
+
+def plotnextdigdouble(data1,data2):
+    expected = len(data1)/26
+    dist1 = difftest(data1)
+    dist2 = difftest(data2)
+    x1 = np.linspace(0,25,26)
+    x2 = x1
+    y1 = np.array([(100*(dist1[i]-expected)/expected) for i in range(26)])
+    y2 = np.array([(100*(dist2[i]-expected)/expected) for i in range(26)])
+    plt.grid()
+    plt.plot(x1,y1,color="b",marker=".",label = "Next Digit Test Ciphertext")
+    plt.plot(x2,y2,marker=".",color="r",label="Next Digit Test TRNG")
+    plt.xlabel("Difference")
+    plt.ylabel("% Error")
+    plt.legend()
+    plt.show()
+
 
 if __name__ == "__main__":
-    #plotcorr(trng)
+    #plotcorr(cipher)
     #plotcorrdouble(cipher,trng)
     #plotfreq(cipher)
-    plotcarlo(trng)
+    #plotcarlo(cipher)
+    plotnextdigdouble(cipher,trng)
+    plotnextdighist(trng)

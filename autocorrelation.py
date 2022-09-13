@@ -38,10 +38,10 @@ def plot_correlogram(data,maxk=100):
     x = np.linspace(1,maxk,maxk)
     y = np.array([graph[i] for i in range(1,maxk+1)])
     plt.grid()
-    plt.plot(x,y,marker=".",color="b")
+    plt.plot(x,y,marker=".",color="b",label="Ciphertext Correlogram")
     plt.xlabel("Lag (k)")
     plt.ylabel("Autocorrelation")
-    #plt.legend()
+    plt.legend()
     plt.show()
 
 #data = [23.4,24.1,44.4,25.5,29.2,37.1,45.0,61.8,56.7,62.3,30.9,69.6,11.0,56.6,83.4,33.9,75.5,87.3,55.4,95.2]
