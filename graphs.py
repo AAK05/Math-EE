@@ -99,11 +99,45 @@ def plotnextdigdouble(data1,data2):
     plt.legend()
     plt.show()
 
+def plotslope(data):
+    expected = len(data)/26
+    dist = slopetest(data)
+    x = np.linspace(0,25,26)
+    y = np.array([(100*(dist[i]-expected)/expected) for i in range(26)])
+    plt.grid()
+    plt.plot(x,y,color="r",marker=".")
+    plt.xlabel("Difference")
+    plt.ylabel("% Error")
+    plt.show()
+
+def plotslopedouble(data1,data2):
+    expected = len(data1)/26
+    dist1 = slopetest(data1)
+    dist2 = slopetest(data2)
+    x1 = np.linspace(0,25,26)
+    x2 = x1
+    y1 = np.array([(100*(dist1[i]-expected)/expected) for i in range(26)])
+    y2 = np.array([(100*(dist2[i]-expected)/expected) for i in range(26)])
+    plt.grid()
+    plt.plot(x1,y1,color="b",marker=".",label = "Linearity Test Ciphertext")
+    plt.plot(x2,y2,marker=".",color="r",label="Linearity Test TRNG")
+    plt.xlabel("Difference")
+    plt.ylabel("% Error")
+    plt.legend()
+    plt.show()
+
+def plotslopehist(data):
+    dist = slopetest(data)
+    plt.bar(dist.keys(), dist.values(), 1, color='r',edgecolor="black",linewidth=1.2)
+    plt.show()
 
 if __name__ == "__main__":
     #plotcorr(cipher)
     #plotcorrdouble(cipher,trng)
     #plotfreq(cipher)
     #plotcarlo(cipher)
-    plotnextdigdouble(cipher,trng)
-    plotnextdighist(trng)
+    #plotnextdigdouble(cipher,trng)
+    #plotnextdighist(trng)
+    #plotslope(trng)
+    #plotslopedouble(cipher,trng)
+    plotslopehist(trng)
