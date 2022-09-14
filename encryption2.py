@@ -40,7 +40,7 @@ def loadkey(filename):
 
 def loadtxt(fname):
     out = ""
-    with open(fname,"r") as f:
+    with open(fname,"r",encoding="UTF-8") as f:
         for line in f:
             n = line.replace(" ","")
             n = n.translate(str.maketrans("","",string.punctuation))
@@ -101,9 +101,12 @@ print(x)
 y = decrypt(x,"pi-with-coprime2023-b26.json")
 print(y)
 
-writetxt(encrypt(loadtxt("Amber-Spyglass-Clean.txt"),"testkeyfinal.json"),"Amber-Spyglass-Encrypted.txt")
-writejson(FormatTextToNum(loadtxt("Amber-Spyglass-Encrypted.txt")),"Amber-Spyglass_Encrypted-Enumerated.json")
+#writetxt(encrypt(loadtxt("Amber-Spyglass-Clean.txt"),"testkeyfinal.json"),"Amber-Spyglass-Encrypted.txt")
+#writejson(FormatTextToNum(loadtxt("Amber-Spyglass-Encrypted.txt")),"Amber-Spyglass_Encrypted-Enumerated.json")
 #b26 = convertbase26(loadkeysbase10("coprime-digits-mod10-2023-1000k.json","pi-digits.json",length=1000000))
 #b26 = convertbase26(loadkeysbase10("pi-digits.json",length=1000000))
 #writejson(b26,"test26v2.json")
 #print(convertbase26([3,1,4,1,5,9,2,6,5,3]))
+writetxt(loadtxt("lesmis.txt"),"lesmis-clean.txt")
+writetxt(encrypt(loadtxt("lesmis-Clean.txt"),"testkeyfinal.json"),"lesmis-Encrypted.txt")
+writejson(FormatTextToNum(loadtxt("lesmis-Encrypted.txt"))[0:700000],"lesmis-Encrypted-Enumerated-cut.json")

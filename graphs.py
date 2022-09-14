@@ -16,7 +16,16 @@ with open("randorgTRNG3.json","r") as f:
 trng = trng[0:len(cipher)]
 
 def plotcorr(data,maxk=100):
-    plot_correlogram(data,maxk=maxk)
+    graph = correlogram(data,maxk)
+    x = np.linspace(1,maxk,maxk)
+    y = np.array([graph[i] for i in range(1,maxk+1)])
+    plt.grid()
+    plt.plot(x,y,marker=".",color="b",label="Ciphertext Correlogram")
+    plt.xlabel("Lag (k)")
+    plt.ylabel("Autocorrelation")
+    plt.legend()
+    plt.show()
+    return x,y
 
 def plotcorrdouble(data1,data2,maxk=100):
     #import numpy as np
@@ -41,6 +50,34 @@ def plotfreq(data):
     plt.gca().yaxis.set_major_formatter(PercentFormatter(1))
     plt.ylabel("% Frequency")
     plt.xlabel("Character")
+    plt.show()
+
+def plotfreqerr(data):
+    expected = len(data)/26
+    dist = freq_analysis(data)
+    x = np.linspace(1,26,26)
+    y = np.array([(100*(dist[i]-expected)/expected) for i in range(1,27)])
+    plt.grid()
+    plt.plot(x,y,color="r",marker=".")
+    plt.xlabel("Character")
+    plt.ylabel("% Error")
+    plt.show()
+    return x,y
+
+def plotfreqerrdouble(data1,data2):
+    expected = len(data1)/26
+    dist1 = freq_analysis(data1)
+    x1 = np.linspace(1,26,26)
+    y1 = np.array([(100*(dist1[i]-expected)/expected) for i in range(1,27)])
+    dist2 = freq_analysis(data2)
+    x2 = np.linspace(1,26,26)
+    y2 = np.array([(100*(dist2[i]-expected)/expected) for i in range(1,27)])
+    plt.grid()
+    plt.plot(x1,y1,color="b",marker=".",label="Frequency Error Ciphertext")
+    plt.plot(x2,y2,marker=".",color="r",label="Frequency Error TRNG")
+    plt.xlabel("Character")
+    plt.ylabel("% Error")
+    plt.legend()
     plt.show()
 
 def plotcarlo(data):
@@ -76,10 +113,13 @@ def plotnextdig(data):
     plt.xlabel("Difference")
     plt.ylabel("% Error")
     plt.show()
+    return x,y
 
 def plotnextdighist(data):
     dist = difftest(data)
     plt.bar(dist.keys(), dist.values(), 1, color='r',edgecolor="black",linewidth=1.2)
+    plt.xlabel("Difference")
+    plt.ylabel("Frequency")
     plt.show()
 
 def plotnextdigdouble(data1,data2):
@@ -108,6 +148,7 @@ def plotslope(data):
     plt.xlabel("Difference")
     plt.ylabel("% Error")
     plt.show()
+    return x,y
 
 def plotslopedouble(data1,data2):
     expected = len(data1)/26
@@ -128,7 +169,28 @@ def plotslopedouble(data1,data2):
 def plotslopehist(data):
     dist = slopetest(data)
     plt.bar(dist.keys(), dist.values(), 1, color='r',edgecolor="black",linewidth=1.2)
+    plt.xlabel("Difference")
+    plt.ylabel("Frequency")
     plt.show()
+
+def plotcomparison(data1,data2,test):
+    x1,lst1 = test(data1)
+    x2,lst2 = test(data2)
+    lst1.sort()
+    lst2.sort()
+    y1 = np.array(lst1)
+    y2 = np.array(lst2)
+    #diffs = [abs(lst2[i]-lst1[i]) for i in range(len(lst1))]
+    #print("Max diff: " + str(max(diffs)))
+    print("Correlation Coeff: " + str(np.corrcoef(y1,y2)[1,0]))
+    plt.grid()
+    plt.plot(x1,y1,color="b",marker=".",label="Cipher Ranked Autocorrelation")
+    plt.plot(x2,y2,color="r",marker=".",label="TRNG Ranked Autocorrelation")
+    plt.legend()
+    plt.xlabel("Rank")
+    plt.ylabel("Autocorrelation")
+    plt.show()
+    
 
 if __name__ == "__main__":
     #plotcorr(cipher)
@@ -140,3 +202,5 @@ if __name__ == "__main__":
     #plotslope(trng)
     #plotslopedouble(cipher,trng)
     plotslopehist(trng)
+    #plotfreqerrdouble(cipher,trng)
+    #plotcomparison(cipher,trng,plotfreqerr)

@@ -85,7 +85,17 @@ class Provide(object):
 
 if __name__ == "__main__":
     provide = Provide("Projects\\EE\\2022-08-all.bin")
-    integers = provide.integer(1000000, 26)
+    integers = provide.integer(5000000, 26)
     integers = integers + 1
-    with open("Projects\\EE\\TRNG2.json","w") as f:
-        json.dump(integers.tolist(),f)
+    lst = integers.tolist()
+    lst0 = lst[0:1000000]
+    lst1 = lst[1000000:2000000]
+    lst2 = lst[2000000:3000000]
+    lst3 = lst[3000000:4000000]
+    lst4 = lst[4000000:]
+    lsts = (lst0,lst1,lst2,lst3,lst4)
+    count = 0
+    for i in lsts:
+        with open("Projects\\EE\\TRNG{}.json".format(str(count)),"w") as f:
+            json.dump(i,f)
+        count += 1

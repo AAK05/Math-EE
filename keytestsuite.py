@@ -15,7 +15,7 @@ with open(fname,"r") as f:
         data = [x for x in str(f.readline())]
     print(len(data))
 
-data1 = data[0:664044]
+data1 = data[0:664044]#[0:700000]
 data2 = data1[::-1]
 
 #datax and datax2 adds together 1st and 2nd, 3rd and 4th, etc
@@ -69,8 +69,8 @@ for i in range(3*(len(data2)//3)):
         n = (data2[i]) + (data2[i+1]) + (data2[i+2]) #+ (data2[i+3]) + (data2[i+4])
         datax2.append(int(n))"""
 
-print("Maximum autocorrelation (k,autocorrelation): " + str(max_autocorr(data1,20)))
-print("Minimum autocorrelation (k,autocorrelation): " + str(min_autocorr(data1,20)))
+print("Maximum autocorrelation (k,autocorrelation): " + str(max_autocorr(data1,100)))
+print("Minimum autocorrelation (k,autocorrelation): " + str(min_autocorr(data1,100)))
 #plot_correlogram(data1,100)
 #print("Maximum pattern error from expected (pattern,%): " + str(max_pattern(data1)))
 #print("Minimum pattern error from expected (pattern,%): " + str(min_pattern(data1)))
